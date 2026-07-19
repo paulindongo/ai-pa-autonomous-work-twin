@@ -8,7 +8,7 @@ class PersonalAgent:
     def __init__(self, name="AI-PA"):
         self.name = name
 
-    def process_request(self, request: str):
+    def execute(self, request: str):
         return {
             "agent": self.name,
             "request": request,
