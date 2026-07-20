@@ -7,6 +7,7 @@ import {
 
 import Dashboard from "./pages/Dashboard";
 import Settings from "./pages/Settings";
+import AIConnect from "./pages/AIConnect";
 
 
 function App() {
@@ -29,7 +30,14 @@ function App() {
         />
 
 
+        <Route
+          path="/connect"
+          element={<AIConnect />}
+        />
+
+
       </Routes>
+
 
     </BrowserRouter>
 
