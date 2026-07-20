@@ -8,8 +8,16 @@ function MeetingRoom() {
 
   const [meeting, setMeeting] = useState(null);
 
+  const [loading, setLoading] = useState(false);
+
+
 
   async function startMeeting() {
+
+
+    setLoading(true);
+
+    setMeeting(null);
 
 
     try {
@@ -28,26 +36,27 @@ function MeetingRoom() {
 
       const data = await response.json();
 
+
       setMeeting(data);
 
 
-    } catch (error) {
+
+    } catch(error) {
 
 
-      console.error(
-        "Meeting error:",
-        error
-      );
+      console.error(error);
 
-
-      alert(
-        "Unable to connect to AI Meeting Room"
-      );
+      alert("AI Meeting connection failed");
 
 
     }
 
+
+    setLoading(false);
+
+
   }
+
 
 
 
@@ -58,11 +67,9 @@ function MeetingRoom() {
 
       <div className="hero-card">
 
-
         <h1>
           🧠 AI Meeting Room
         </h1>
-
 
         <p>
           AI agents collaborating autonomously on your behalf.
@@ -99,7 +106,11 @@ function MeetingRoom() {
 
         >
 
-          Start AI Meeting
+          {loading
+            ? "AI Agents Collaborating..."
+            : "Start AI Meeting"
+          }
+
 
         </button>
 
@@ -109,79 +120,169 @@ function MeetingRoom() {
 
 
 
+      {loading && (
+
+
+        <div className="stat-card">
+
+          <h2>
+            🔄 AI Agents Working
+          </h2>
+
+
+          <p>
+            🤖 Personal Agent analysing...
+          </p>
+
+
+          <p>
+            🧠 Meeting Agent coordinating...
+          </p>
+
+
+          <p>
+            🤝 Negotiation Agent reviewing...
+          </p>
+
+
+        </div>
+
+
+      )}
+
+
+
+
+
       {meeting && (
+
 
         <>
 
 
-          <div className="stat-card">
+        <div className="agent-grid">
 
 
-            <h2>
-              🤖 AI Participants
-            </h2>
+          {meeting.participants.map((agent,index)=>(
 
 
-            {meeting.participants.map((agent)=>(
+            <div className="agent-card" key={agent}>
 
-              <p key={agent}>
+
+              <h3>
+
+                {
+                  index === 0
+                  ? "🤖"
+                  : index === 1
+                  ? "🧠"
+                  : "🤝"
+                }
+
+                {" "}
 
                 {agent}
 
-              </p>
 
-            ))}
-
-
-          </div>
+              </h3>
 
 
-
-
-
-          <div className="stat-card">
-
-
-            <h2>
-              💬 AI Discussion
-            </h2>
-
-
-
-            {meeting.messages.map((message,index)=>(
-
-              <p key={index}>
-
-
-                <strong>
-                  {message.sender}
-                </strong>
-
-
-                :
-                {" "}
-
-
-                {message.message}
-
-
+              <p>
+                Online
               </p>
 
 
-            ))}
+              <span>
+                Ready
+              </span>
 
 
-          </div>
+            </div>
+
+
+          ))}
+
+
+        </div>
+
+
+
+
+
+        <div className="stat-card">
+
+
+          <h2>
+            💬 AI Discussion
+          </h2>
+
+
+
+          {meeting.messages.map((message,index)=>(
+
+
+            <p key={index}>
+
+
+              <strong>
+                {message.sender}
+              </strong>
+
+
+              :
+              {" "}
+
+              {message.message}
+
+
+            </p>
+
+
+          ))}
+
+
+        </div>
+
+
+
+
+
+        <div className="stat-card">
+
+
+          <h2>
+            📋 Meeting Outcome
+          </h2>
+
+
+          <p>
+            ✅ Decisions captured
+          </p>
+
+
+          <p>
+            ✅ Action items prepared
+          </p>
+
+
+          <p>
+            ✅ User summary ready
+          </p>
+
+
+        </div>
 
 
 
         </>
+
 
       )}
 
 
 
     </div>
+
 
   );
 
