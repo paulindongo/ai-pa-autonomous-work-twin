@@ -1,7 +1,5 @@
 from fastapi import FastAPI
-
-from backend.agents.orchestrator import AgentOrchestrator
-from backend.agents.meeting_room_agent import MeetingRoomAgent
+from fastapi.middleware.cors import CORSMiddleware
 
 
 app = FastAPI(
@@ -9,34 +7,85 @@ app = FastAPI(
 )
 
 
-orchestrator = AgentOrchestrator()
+# Allow React frontend to communicate with FastAPI
+app.add_middleware(
 
-meeting_room = MeetingRoomAgent()
+    CORSMiddleware,
 
+    allow_origins=[
 
-@app.get("/")
-def home():
-    return {
-        "name": "AI-PA",
-        "status": "online"
-    }
+        "https://verbose-space-cod-vpv4rv9wj7q5c69x5-5173.app.github.dev",
 
+        "http://localhost:5173"
 
-@app.post("/task")
-def create_task(request: str):
+    ],
 
-    response = orchestrator.auto_route(
-        request
-    )
+    allow_credentials=True,
 
-    return response
+    allow_methods=["*"],
+
+    allow_headers=["*"],
+
+)
+
 
 
 @app.post("/meeting/create")
 def create_meeting(topic: str):
 
-    response = meeting_room.create_meeting(
-        topic
-    )
+    return {
 
-    return response
+        "topic": topic,
+
+        "participants": [
+
+            "Personal Agent",
+
+            "Meeting Agent",
+
+            "Negotiation Agent"
+
+        ],
+
+        "messages": [
+
+            {
+
+                "sender": "Meeting Agent",
+
+                "message": "Meeting started. Analysing the topic."
+
+            },
+
+            {
+
+                "sender": "Negotiation Agent",
+
+                "message": "Reviewing options and possible agreements."
+
+            },
+
+            {
+
+                "sender": "Personal Agent",
+
+                "message": "Recording decisions and preparing user summary."
+
+            }
+
+        ],
+
+        "status": "completed"
+
+    }
+
+
+
+@app.get("/")
+def home():
+
+    return {
+
+        "message": "AI-PA Backend Online"
+
+    }

@@ -8,15 +8,19 @@ import {
 import Dashboard from "./pages/Dashboard";
 import Settings from "./pages/Settings";
 import AIConnect from "./pages/AIConnect";
+import MeetingRoom from "./pages/MeetingRoom";
 
 
 function App() {
+
 
   return (
 
     <BrowserRouter>
 
+
       <Routes>
+
 
         <Route
           path="/"
@@ -33,6 +37,12 @@ function App() {
         <Route
           path="/connect"
           element={<AIConnect />}
+        />
+
+
+        <Route
+          path="/meetings"
+          element={<MeetingRoom />}
         />
 
 
