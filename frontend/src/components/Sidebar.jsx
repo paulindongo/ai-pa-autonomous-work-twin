@@ -4,40 +4,50 @@ import {
   Brain,
   Calendar,
   Folder,
-  Settings,
+  Settings as SettingsIcon,
 } from "lucide-react";
+
+import { Link } from "react-router-dom";
 
 import logo from "../assets/aipa-logo.png";
 
 
 function Sidebar() {
 
+
   const menuItems = [
     {
       name: "Dashboard",
       icon: Home,
+      path: "/",
     },
     {
       name: "AI Connect",
       icon: Users,
+      path: "/connect",
     },
     {
       name: "Meeting Room",
       icon: Brain,
+      path: "/meetings",
     },
     {
       name: "Calendar",
       icon: Calendar,
+      path: "/calendar",
     },
     {
       name: "Knowledge Vault",
       icon: Folder,
+      path: "/vault",
     },
     {
       name: "Settings",
-      icon: Settings,
+      icon: SettingsIcon,
+      path: "/settings",
     },
   ];
+
 
 
   return (
@@ -78,35 +88,35 @@ function Sidebar() {
       <nav className="navigation">
 
 
-        {menuItems.map((item, index) => {
+        {menuItems.map((item) => {
+
 
           const Icon = item.icon;
 
 
           return (
 
-            <button
+            <Link
 
               key={item.name}
 
-              className={
-                index === 0
-                ? "nav-item active"
-                : "nav-item"
-              }
+              to={item.path}
+
+              className="nav-item"
 
             >
 
-              <Icon size={20}/>
+              <Icon size={20} />
 
               <span>
                 {item.name}
               </span>
 
 
-            </button>
+            </Link>
 
           );
+
 
         })}
 
@@ -134,7 +144,6 @@ function Sidebar() {
 
 
       </div>
-
 
 
     </aside>
