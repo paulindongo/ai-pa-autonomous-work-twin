@@ -561,3 +561,8 @@ grid-template-columns:
   transform: translateY(-2px);
   box-shadow: 0 8px 20px rgba(0,0,0,0.3);
 }
+
+.quick-actions button {
+  margin-right: 12px;
+  margin-bottom: 10px;
+}
