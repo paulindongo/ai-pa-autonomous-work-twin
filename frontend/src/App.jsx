@@ -13,11 +13,9 @@ import MeetingRoom from "./pages/MeetingRoom";
 
 function App() {
 
-
   return (
 
     <BrowserRouter>
-
 
       <Routes>
 
@@ -47,7 +45,6 @@ function App() {
 
 
       </Routes>
-
 
     </BrowserRouter>
 

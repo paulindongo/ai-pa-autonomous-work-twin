@@ -1,24 +1,7 @@
-import { useState } from "react";
+import { Link } from "react-router-dom";
 
 
 function Settings() {
-
-
-  const [saved, setSaved] = useState(false);
-
-
-  function saveProfile() {
-
-    setSaved(true);
-
-    setTimeout(() => {
-
-      setSaved(false);
-
-    }, 3000);
-
-  }
-
 
 
   return (
@@ -26,52 +9,66 @@ function Settings() {
     <div className="main-content">
 
 
-      <section className="hero-card">
+      <Link
+        to="/"
+        className="save-button"
+      >
+        ← Back to Dashboard
+      </Link>
+
+
+
+
+      <div className="hero-card">
 
 
         <h1>
-          ⚙️ AI-PA Personalization
+          AI-PA Personalization
         </h1>
 
 
         <p>
-          Customize your autonomous work twin
-          and how it collaborates for you.
+          Customize your autonomous work twin.
         </p>
 
 
-      </section>
+      </div>
 
 
 
 
-
-      <section className="stat-card">
+      <div className="stat-card">
 
 
         <h2>
-          🤖 Your AI Name
+          Your AI Name
         </h2>
+
 
 
         <input
+
           className="settings-input"
+
+          placeholder="Enter AI name"
+
           defaultValue="Atlas"
+
         />
 
 
-      </section>
+      </div>
 
 
 
 
-
-      <section className="stat-card">
+      <div className="stat-card">
 
 
         <h2>
-          🧠 AI Personality
+          AI Personality
         </h2>
+
 
 
         <select className="settings-input">
@@ -100,18 +97,18 @@ function Settings() {
         </select>
 
 
-      </section>
+      </div>
 
 
 
 
-
-      <section className="stat-card">
+      <div className="stat-card">
 
 
         <h2>
-          🌌 Workspace Theme
+          Workspace Theme
         </h2>
+
 
 
         <button className="theme-button">
@@ -129,34 +126,17 @@ function Settings() {
         </button>
 
 
-      </section>
+
+      </div>
 
 
 
 
-
-      <button
-        className="save-button"
-        onClick={saveProfile}
-      >
+      <button className="save-button">
 
         Save AI Profile
 
       </button>
-
-
-
-
-
-      {saved && (
-
-        <div className="hero-card">
-
-          ✅ AI profile updated successfully.
-
-        </div>
-
-      )}
 
 
 

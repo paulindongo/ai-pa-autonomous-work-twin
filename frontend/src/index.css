@@ -534,3 +534,30 @@ grid-template-columns:
 
 
 }
+
+.page-navigation {
+
+  margin-bottom: 25px;
+
+}
+
+.back-button {
+  display: inline-block;
+  margin-bottom: 25px;
+  padding: 12px 22px;
+  border-radius: 8px;
+  background: linear-gradient(
+    135deg,
+    #2563eb,
+    #9333ea
+  );
+  color: white;
+  font-weight: 600;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.back-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}

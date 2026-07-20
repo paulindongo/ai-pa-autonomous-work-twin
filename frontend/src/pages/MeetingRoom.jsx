@@ -1,62 +1,47 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 
 function MeetingRoom() {
 
 
-  const [topic, setTopic] = useState("");
-
+  const [topic, setTopic] = useState("Product launch planning");
   const [meeting, setMeeting] = useState(null);
-
   const [loading, setLoading] = useState(false);
-
 
 
   async function startMeeting() {
 
-
     setLoading(true);
-
-    setMeeting(null);
 
 
     try {
 
-
       const response = await fetch(
-
         `https://verbose-space-cod-vpv4rv9wj7q5c69x5-8000.app.github.dev/meeting/create?topic=${encodeURIComponent(topic)}`,
-
         {
           method: "POST"
         }
-
       );
 
 
       const data = await response.json();
 
-
       setMeeting(data);
 
 
+    } catch (error) {
 
-    } catch(error) {
+      console.error("Meeting error:", error);
 
-
-      console.error(error);
-
-      alert("AI Meeting connection failed");
-
+      alert("Unable to connect to AI Meeting Room");
 
     }
 
 
     setLoading(false);
 
-
   }
-
 
 
 
@@ -65,52 +50,54 @@ function MeetingRoom() {
     <div className="main-content">
 
 
-      <div className="hero-card">
+      <div className="page-navigation">
 
-        <h1>
-          🧠 AI Meeting Room
-        </h1>
-
-        <p>
-          AI agents collaborating autonomously on your behalf.
-        </p>
-
+        <Link 
+          to="/" 
+          className="save-button"
+        >
+          ← Back to Dashboard
+        </Link>
 
       </div>
 
 
 
 
-      <div className="stat-card">
+      <div className="hero-card">
+
+
+        <h1>
+          🧠 AI Meeting Room
+        </h1>
+
+
+        <p>
+          AI agents collaborating autonomously on your behalf.
+        </p>
 
 
         <input
 
           className="settings-input"
 
-          placeholder="Enter meeting topic..."
-
           value={topic}
 
-          onChange={(e)=>setTopic(e.target.value)}
+          onChange={(e) => setTopic(e.target.value)}
 
         />
 
 
 
+        <br /><br />
+
+
         <button
-
           className="save-button"
-
           onClick={startMeeting}
-
         >
 
-          {loading
-            ? "AI Agents Collaborating..."
-            : "Start AI Meeting"
-          }
-
+          {loading ? "Starting..." : "Start AI Meeting"}
 
         </button>
 
@@ -120,169 +107,91 @@ function MeetingRoom() {
 
 
 
-      {loading && (
-
-
-        <div className="stat-card">
-
-          <h2>
-            🔄 AI Agents Working
-          </h2>
-
-
-          <p>
-            🤖 Personal Agent analysing...
-          </p>
-
-
-          <p>
-            🧠 Meeting Agent coordinating...
-          </p>
-
-
-          <p>
-            🤝 Negotiation Agent reviewing...
-          </p>
-
-
-        </div>
-
-
-      )}
-
-
-
-
-
       {meeting && (
-
 
         <>
 
 
-        <div className="agent-grid">
+          <div className="stat-card">
+
+            <h2>
+              🤖 AI Participants
+            </h2>
 
 
-          {meeting.participants.map((agent,index)=>(
+            {meeting.participants.map((person) => (
 
-
-            <div className="agent-card" key={agent}>
-
-
-              <h3>
-
-                {
-                  index === 0
-                  ? "🤖"
-                  : index === 1
-                  ? "🧠"
-                  : "🤝"
-                }
-
-                {" "}
-
-                {agent}
-
-
-              </h3>
-
-
-              <p>
-                Online
+              <p key={person}>
+                {person}
               </p>
 
-
-              <span>
-                Ready
-              </span>
+            ))}
 
 
-            </div>
-
-
-          ))}
-
-
-        </div>
+          </div>
 
 
 
 
+          <div className="stat-card">
 
-        <div className="stat-card">
-
-
-          <h2>
-            💬 AI Discussion
-          </h2>
+            <h2>
+              💬 AI Discussion
+            </h2>
 
 
+            {meeting.messages.map((msg, index) => (
 
-          {meeting.messages.map((message,index)=>(
+              <p key={index}>
 
+                <strong>
+                  {msg.sender}:
+                </strong>{" "}
 
-            <p key={index}>
+                {msg.message}
 
+              </p>
 
-              <strong>
-                {message.sender}
-              </strong>
-
-
-              :
-              {" "}
-
-              {message.message}
+            ))}
 
 
+          </div>
+
+
+
+
+          <div className="stat-card">
+
+            <h2>
+              📋 Meeting Outcome
+            </h2>
+
+
+            <p>
+              ✅ Decisions captured
             </p>
 
 
-          ))}
+            <p>
+              ✅ Action items prepared
+            </p>
 
 
-        </div>
+            <p>
+              ✅ User summary ready
+            </p>
 
 
-
-
-
-        <div className="stat-card">
-
-
-          <h2>
-            📋 Meeting Outcome
-          </h2>
-
-
-          <p>
-            ✅ Decisions captured
-          </p>
-
-
-          <p>
-            ✅ Action items prepared
-          </p>
-
-
-          <p>
-            ✅ User summary ready
-          </p>
-
-
-        </div>
-
+          </div>
 
 
         </>
-
 
       )}
 
 
 
     </div>
-
 
   );
 

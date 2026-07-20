@@ -1,31 +1,26 @@
+import { Link } from "react-router-dom";
+
+
 function AIConnect() {
 
 
   const connections = [
-
+    {
+      name: "Nova AI",
+      status: "Online",
+      role: "Product Assistant"
+    },
     {
       name: "Atlas AI",
       status: "Online",
-      role: "Personal Work Twin",
-      icon: "🤖"
+      role: "Personal Work Twin"
     },
-
     {
-      name: "Meeting Agent",
-      status: "Online",
-      role: "Autonomous Meeting Coordinator",
-      icon: "🧠"
-    },
-
-    {
-      name: "Negotiation Agent",
-      status: "Ready",
-      role: "Decision & Agreement Assistant",
-      icon: "🤝"
+      name: "Enterprise AI",
+      status: "Available",
+      role: "Business Agent"
     }
-
   ];
-
 
 
   return (
@@ -33,118 +28,79 @@ function AIConnect() {
     <div className="main-content">
 
 
-      <section className="hero-card">
+      <div className="page-navigation">
+
+        <Link 
+          to="/" 
+          className="save-button"
+        >
+          ← Back to Dashboard
+        </Link>
+
+      </div>
+
+
+
+
+      <div className="hero-card">
 
 
         <h1>
-          🤖 AI Connect
+          AI Connect
         </h1>
 
 
         <p>
-          AI-PA agents collaborating with other AI agents
-          to complete work autonomously.
+          Connect and collaborate with other AI-PAs.
         </p>
 
 
-      </section>
+      </div>
 
 
 
 
-
-      <section className="meeting-card">
-
-
-        <h2>
-          AI-to-AI Collaboration Network
-        </h2>
+      <div className="stat-card">
 
 
-        <p>
-          Your AI agents can communicate, coordinate,
-          and exchange information on your behalf.
-        </p>
+        <button className="save-button">
+
+          + Invite AI-PA User
+
+        </button>
 
 
-        <div className="agent-grid">
-
-
-          {connections.map((ai) => (
-
-
-            <div
-              className="agent-card"
-              key={ai.name}
-            >
-
-
-              <h3>
-
-                {ai.icon} {ai.name}
-
-              </h3>
+      </div>
 
 
 
-              <p>
-                {ai.role}
-              </p>
+
+      {connections.map((ai) => (
+
+        <div
+          className="stat-card"
+          key={ai.name}
+        >
 
 
-
-              <span>
-
-                ● {ai.status}
-
-              </span>
+          <h2>
+            🤖 {ai.name}
+          </h2>
 
 
-            </div>
+          <p>
+            {ai.role}
+          </p>
 
 
-          ))}
+          <span>
+            ● {ai.status}
+          </span>
 
 
         </div>
 
-
-      </section>
-
-
-
-
-
-      <section className="hero-card">
-
-
-        <h2>
-          Autonomous Communication Flow
-        </h2>
-
-
-        <p>
-          🤖 Atlas AI → 🧠 Meeting Agent → 🤝 Negotiation Agent
-        </p>
-
-
-        <p>
-          Agents exchange context and return decisions
-          back to your AI Personal Assistant.
-        </p>
-
-
-      </section>
-
-
-
-
-
-      <button className="save-button">
-
-        + Invite AI-PA User
-
-      </button>
+      ))}
 
 
 
@@ -152,8 +108,8 @@ function AIConnect() {
 
   );
 
-
 }
 
 
 export default AIConnect;
+
