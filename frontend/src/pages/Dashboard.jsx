@@ -5,6 +5,26 @@ import Sidebar from "../components/Sidebar";
 function Dashboard() {
 
 
+  const activities = [
+    {
+      time: "10:42",
+      text: "AI Meeting completed successfully",
+      color: "🟢"
+    },
+    {
+      time: "10:30",
+      text: "Connected with Nova AI",
+      color: "🔵"
+    },
+    {
+      time: "09:55",
+      text: "Atlas AI analysed today's priorities",
+      color: "🟣"
+    }
+  ];
+
+
+
   return (
 
     <div className="dashboard-layout">
@@ -18,21 +38,17 @@ function Dashboard() {
 
         <header className="top-header">
 
-
           <div>
 
             <h1>
               Good Morning 👋
             </h1>
 
-
             <p>
-              Your AI team is ready to work autonomously.
+              Your autonomous AI team is ready to work.
             </p>
 
-
           </div>
-
 
         </header>
 
@@ -43,38 +59,49 @@ function Dashboard() {
 
 
           <h2>
-            Welcome to AI-PA
+            🧠 AI-PA Command Center
           </h2>
 
 
           <p>
-            Your autonomous work twin that coordinates
-            tasks, meetings, decisions, and AI collaboration
-            on your behalf.
+            Your autonomous work twin coordinates meetings,
+            decisions, tasks, and AI collaboration on your behalf.
           </p>
 
 
-
-          <div className="command-box">
-
-
-            <input
-
-              placeholder="Ask AI-PA anything..."
-
-            />
+        </section>
 
 
-            <button>
-              Send
-            </button>
 
 
-          </div>
 
+
+        <section className="hero-card">
+
+
+          <h2>
+            AI-PA Status
+          </h2>
+
+
+          <h3>
+            🤖 Atlas AI
+          </h3>
+
+
+          <p>
+            🟢 Online
+          </p>
+
+
+          <p>
+            Monitoring tasks and ready for autonomous collaboration.
+          </p>
 
 
         </section>
+
+
 
 
 
@@ -85,21 +112,17 @@ function Dashboard() {
 
           <div className="stat-card">
 
-
             <h3>
               Today's Tasks
             </h3>
-
 
             <strong>
               12
             </strong>
 
-
             <p>
               3 high priority
             </p>
-
 
           </div>
 
@@ -108,22 +131,18 @@ function Dashboard() {
 
 
           <div className="stat-card">
-
 
             <h3>
               AI Meetings
             </h3>
 
-
             <strong>
               5
             </strong>
 
-
             <p>
-              2 AI-to-AI meetings
+              AI-to-AI collaboration
             </p>
-
 
           </div>
 
@@ -133,21 +152,17 @@ function Dashboard() {
 
           <div className="stat-card">
 
-
             <h3>
-              AI Connections
+              Connections
             </h3>
-
 
             <strong>
               18
             </strong>
 
-
             <p>
-              Agents connected
+              AI agents connected
             </p>
-
 
           </div>
 
@@ -160,28 +175,47 @@ function Dashboard() {
 
 
 
-        <section className="meeting-card">
+
+        <section className="hero-card">
 
 
           <h2>
-            🧠 AI Meeting Room
+            ⚡ Quick Actions
           </h2>
-
-
-          <p>
-
-            Personal Agent, Meeting Agent and Negotiation
-            Agent collaborate to make decisions for you.
-
-          </p>
 
 
 
           <Link to="/meetings">
 
-            <button>
+            <button className="save-button">
 
-              Start AI Meeting
+              🚀 Start AI Meeting
+
+            </button>
+
+          </Link>
+
+
+
+
+          <Link to="/connect">
+
+            <button className="save-button">
+
+              🤖 Connect AI Agent
+
+            </button>
+
+          </Link>
+
+
+
+
+          <Link to="/settings">
+
+            <button className="save-button">
+
+              ⚙ Manage Profile
 
             </button>
 
@@ -195,32 +229,45 @@ function Dashboard() {
 
 
 
+
+
         <section className="hero-card">
 
 
           <h2>
-            🤖 AI Agent Activity
+            📡 Recent AI Activity
           </h2>
 
 
 
-          <p>
-            🟢 Personal Agent is online and monitoring tasks.
-          </p>
+          {
+            activities.map((activity,index)=>(
+
+              <p key={index}>
+
+                {activity.color}
+
+                {" "}
+
+                {activity.time}
+
+                {" - "}
+
+                {activity.text}
 
 
-          <p>
-            🔵 Meeting Agent is ready for collaboration.
-          </p>
+              </p>
 
 
-          <p>
-            🟣 Negotiation Agent is ready to evaluate options.
-          </p>
+            ))
+          }
 
 
 
         </section>
+
+
+
 
 
 
@@ -229,9 +276,7 @@ function Dashboard() {
 
     </div>
 
-
   );
-
 
 }
 
