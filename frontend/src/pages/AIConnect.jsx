@@ -1,22 +1,31 @@
 function AIConnect() {
 
+
   const connections = [
-    {
-      name: "Nova AI",
-      status: "Online",
-      role: "Product Assistant"
-    },
+
     {
       name: "Atlas AI",
       status: "Online",
-      role: "Personal Work Twin"
+      role: "Personal Work Twin",
+      icon: "🤖"
     },
+
     {
-      name: "Enterprise AI",
-      status: "Available",
-      role: "Business Agent"
+      name: "Meeting Agent",
+      status: "Online",
+      role: "Autonomous Meeting Coordinator",
+      icon: "🧠"
+    },
+
+    {
+      name: "Negotiation Agent",
+      status: "Ready",
+      role: "Decision & Agreement Assistant",
+      icon: "🤝"
     }
+
   ];
+
 
 
   return (
@@ -24,64 +33,125 @@ function AIConnect() {
     <div className="main-content">
 
 
-      <div className="hero-card">
+      <section className="hero-card">
+
 
         <h1>
-          AI Connect
+          🤖 AI Connect
         </h1>
 
+
         <p>
-          Connect and collaborate with other AI-PAs.
+          AI-PA agents collaborating with other AI agents
+          to complete work autonomously.
         </p>
 
 
-      </div>
+      </section>
 
 
 
-      <div className="stat-card">
-
-        <button className="save-button">
-
-          + Invite AI-PA User
-
-        </button>
 
 
-      </div>
+      <section className="meeting-card">
+
+
+        <h2>
+          AI-to-AI Collaboration Network
+        </h2>
+
+
+        <p>
+          Your AI agents can communicate, coordinate,
+          and exchange information on your behalf.
+        </p>
+
+
+        <div className="agent-grid">
+
+
+          {connections.map((ai) => (
+
+
+            <div
+              className="agent-card"
+              key={ai.name}
+            >
+
+
+              <h3>
+
+                {ai.icon} {ai.name}
+
+              </h3>
 
 
 
-      {connections.map((ai) => (
-
-        <div
-          className="stat-card"
-          key={ai.name}
-        >
-
-          <h2>
-            🤖 {ai.name}
-          </h2>
+              <p>
+                {ai.role}
+              </p>
 
 
-          <p>
-            {ai.role}
-          </p>
+
+              <span>
+
+                ● {ai.status}
+
+              </span>
 
 
-          <span>
-            ● {ai.status}
-          </span>
+            </div>
+
+
+          ))}
 
 
         </div>
 
-      ))}
+
+      </section>
+
+
+
+
+
+      <section className="hero-card">
+
+
+        <h2>
+          Autonomous Communication Flow
+        </h2>
+
+
+        <p>
+          🤖 Atlas AI → 🧠 Meeting Agent → 🤝 Negotiation Agent
+        </p>
+
+
+        <p>
+          Agents exchange context and return decisions
+          back to your AI Personal Assistant.
+        </p>
+
+
+      </section>
+
+
+
+
+
+      <button className="save-button">
+
+        + Invite AI-PA User
+
+      </button>
+
 
 
     </div>
 
   );
+
 
 }
 
