@@ -17,7 +17,7 @@ function MeetingRoom() {
     try {
 
       const response = await fetch(
-        `http://localhost:8000/meeting/create?topic=${encodeURIComponent(topic)}`,
+        `https://silver-space-zebra-4q74v756pv6rcj5qj-8000.app.github.dev/meeting/create?topic=${encodeURIComponent(topic)}`,
         {
           method: "POST"
         }
