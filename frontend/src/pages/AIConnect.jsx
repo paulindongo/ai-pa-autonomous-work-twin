@@ -4,23 +4,31 @@ import { Link } from "react-router-dom";
 function AIConnect() {
 
 
-  const connections = [
-    {
-      name: "Nova AI",
-      status: "Online",
-      role: "Product Assistant"
-    },
+  const agents = [
+
     {
       name: "Atlas AI",
-      status: "Online",
-      role: "Personal Work Twin"
+      role: "Personal Work Twin",
+      status: "Connected",
+      icon: "🟢"
     },
+
+    {
+      name: "Nova AI",
+      role: "Product Strategy Agent",
+      status: "Connected",
+      icon: "🟢"
+    },
+
     {
       name: "Enterprise AI",
+      role: "Business Agent",
       status: "Available",
-      role: "Business Agent"
+      icon: "🟡"
     }
+
   ];
+
 
 
   return (
@@ -28,16 +36,20 @@ function AIConnect() {
     <div className="main-content">
 
 
+
       <div className="page-navigation">
 
         <Link 
-          to="/" 
-          className="save-button"
+          to="/"
+          className="back-button"
         >
+
           ← Back to Dashboard
+
         </Link>
 
       </div>
+
 
 
 
@@ -46,12 +58,12 @@ function AIConnect() {
 
 
         <h1>
-          AI Connect
+          🌐 AI Connect Network
         </h1>
 
 
         <p>
-          Connect and collaborate with other AI-PAs.
+          Connect and collaborate with other autonomous AI agents.
         </p>
 
 
@@ -60,14 +72,20 @@ function AIConnect() {
 
 
 
+
+
+
       <div className="stat-card">
 
 
-        <button className="save-button">
+        <h2>
+          🤖 Connected AI Agents
+        </h2>
 
-          + Invite AI-PA User
 
-        </button>
+        <p>
+          Your AI-PA can communicate, collaborate and exchange information with other AI systems.
+        </p>
 
 
       </div>
@@ -75,32 +93,82 @@ function AIConnect() {
 
 
 
-      {connections.map((ai) => (
+
+
+
+      {agents.map((agent)=>(
+
 
         <div
+
           className="stat-card"
-          key={ai.name}
+
+          key={agent.name}
+
         >
 
 
           <h2>
-            🤖 {ai.name}
+
+            {agent.icon} {agent.name}
+
           </h2>
 
 
+
           <p>
-            {ai.role}
+
+            Role: {agent.role}
+
           </p>
 
 
-          <span>
-            ● {ai.status}
-          </span>
+
+          <p>
+
+            Status: {agent.status}
+
+          </p>
+
 
 
         </div>
 
+
       ))}
+
+
+
+
+
+
+
+      <div className="hero-card">
+
+
+        <h2>
+          🔗 AI-to-AI Collaboration
+        </h2>
+
+
+
+        <p>
+          Atlas AI can coordinate with Nova AI and Enterprise AI to complete complex tasks.
+        </p>
+
+
+
+        <button className="save-button">
+
+          + Connect New AI Agent
+
+        </button>
+
+
+
+      </div>
+
+
 
 
 
@@ -112,4 +180,3 @@ function AIConnect() {
 
 
 export default AIConnect;
-
