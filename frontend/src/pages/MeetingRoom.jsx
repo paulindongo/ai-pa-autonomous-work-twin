@@ -4,29 +4,40 @@ import { Link } from "react-router-dom";
 
 function MeetingRoom() {
 
-
-  const [topic, setTopic] = useState(
-    "Product launch planning"
-  );
-
-  const [meetingStarted, setMeetingStarted] = useState(false);
-
-  const [thinking, setThinking] = useState(false);
+  const [topic, setTopic] = useState("Product launch planning");
+  const [meeting, setMeeting] = useState(null);
+  const [loading, setLoading] = useState(false);
 
 
+  async function startMeeting() {
 
-  function startMeeting() {
+    setLoading(true);
 
-    setThinking(true);
+    try {
+
+      const response = await fetch(
+        `https://verbose-space-cod-vpv4rv9wj7q5c69x5-8000.app.github.dev/meeting/create?topic=${encodeURIComponent(topic)}`,
+        {
+          method: "POST"
+        }
+      );
 
 
-    setTimeout(() => {
+      const data = await response.json();
 
-      setThinking(false);
+      setMeeting(data);
 
-      setMeetingStarted(true);
 
-    }, 3000);
+    } catch (error) {
+
+      console.error(error);
+
+      alert("Unable to connect to AI Meeting Room");
+
+    }
+
+
+    setLoading(false);
 
   }
 
@@ -39,15 +50,11 @@ function MeetingRoom() {
 
       <div className="page-navigation">
 
-        <Link
-          to="/"
-          className="save-button"
-        >
+        <Link to="/" className="back-button">
           ← Back to Dashboard
         </Link>
 
       </div>
-
 
 
 
@@ -60,7 +67,7 @@ function MeetingRoom() {
 
 
         <p>
-          AI agents negotiating and collaborating autonomously.
+          Autonomous AI agents collaborating on your behalf.
         </p>
 
 
@@ -77,7 +84,9 @@ function MeetingRoom() {
 
 
 
-        <br/><br/>
+        <br />
+        <br />
+
 
 
         <button
@@ -88,103 +97,38 @@ function MeetingRoom() {
 
         >
 
-          🚀 Start AI Meeting
+          {loading ? "Agents are thinking..." : "Start AI Meeting"}
 
         </button>
 
 
-
       </div>
 
 
 
 
 
-      <div className="stats-grid">
+      {loading && (
 
-
-        <div className="stat-card">
-
-          🤖 Atlas AI
-
-          <p>
-            Personal Work Twin
-          </p>
-
-          <span>
-            🟢 Online
-          </span>
-
-        </div>
-
-
-
-        <div className="stat-card">
-
-          🧠 Nova AI
-
-          <p>
-            Product Strategy Agent
-          </p>
-
-          <span>
-            🟢 Online
-          </span>
-
-        </div>
-
-
-
-
-        <div className="stat-card">
-
-          💼 Enterprise AI
-
-          <p>
-            Business Agent
-          </p>
-
-          <span>
-            🟡 Available
-          </span>
-
-        </div>
-
-
-
-      </div>
-
-
-
-
-
-      {thinking && (
-
-        <div className="stat-card">
+        <div className="stat-card thinking-card">
 
           <h2>
-            🤔 Agents Thinking...
+            🤖 AI Agents Thinking...
           </h2>
 
 
-          <p className="thinking">
-
-            Atlas AI is analysing objectives...
-
+          <p>
+            Personal Agent is analysing the request...
           </p>
 
 
-          <p className="thinking">
-
-            Nova AI is generating strategies...
-
+          <p>
+            Meeting Agent is preparing discussion...
           </p>
 
 
-          <p className="thinking">
-
-            Enterprise AI is evaluating impact...
-
+          <p>
+            Negotiation Agent is evaluating options...
           </p>
 
 
@@ -197,94 +141,140 @@ function MeetingRoom() {
 
 
 
-      {meetingStarted && (
-
+      {meeting && (
 
         <>
 
 
-        <div className="stat-card">
+          <div className="stat-card">
 
 
-          <h2>
-            💬 Live AI Discussion
-          </h2>
+            <h2>
+              👥 AI Participants
+            </h2>
 
 
-          <p>
-            🤖 Atlas AI: Reviewing objectives and priorities.
-          </p>
+            <div className="agent-grid">
 
 
-          <p>
-            🧠 Nova AI: Analysing strategic opportunities.
-          </p>
+            {meeting.participants.map((agent)=>(
+              
+              <div 
+                className="agent-card"
+                key={agent}
+              >
+
+                <h3>
+                  🤖 {agent}
+                </h3>
+
+                <p>
+                  Online
+                </p>
+
+              </div>
+
+            ))}
 
 
-          <p>
-            💼 Enterprise AI: Evaluating business impact.
-          </p>
+            </div>
 
 
-        </div>
-
-
-
-
-
-        <div className="stat-card">
-
-
-          <h2>
-            📋 Final AI Summary
-          </h2>
-
-
-          <p>
-            ✅ Decisions captured from AI collaboration
-          </p>
-
-
-          <p>
-            ✅ Strategic recommendations prepared
-          </p>
-
-
-          <p>
-            ✅ Next steps generated automatically
-          </p>
-
-
-        </div>
+          </div>
 
 
 
 
 
-        <div className="stat-card">
 
 
-          <h2>
-            🚀 Action Items
-          </h2>
+          <div className="stat-card">
 
 
-          <p>
-            ☑ Review AI recommendations
-          </p>
+            <h2>
+              💬 Live Meeting Timeline
+            </h2>
 
 
-          <p>
-            ☑ Assign follow-up tasks
-          </p>
+            {meeting.messages.map((msg,index)=>(
+
+              <p key={index}>
+
+                <strong>
+                  {msg.sender}
+                </strong>
+
+                :
+                
+                {msg.message}
+
+              </p>
+
+            ))}
 
 
-          <p>
-            ☑ Schedule next collaboration
-          </p>
+          </div>
 
 
-        </div>
+
+
+
+
+          <div className="stat-card">
+
+
+            <h2>
+              📋 AI Generated Summary
+            </h2>
+
+
+            <p>
+              ✅ Key decisions captured
+            </p>
+
+
+            <p>
+              ✅ Recommendations prepared
+            </p>
+
+
+            <p>
+              ✅ Next steps generated
+            </p>
+
+
+          </div>
+
+
+
+
+
+
+          <div className="stat-card">
+
+
+            <h2>
+              🚀 Action Items
+            </h2>
+
+
+            <p>
+              • Review AI recommendations
+            </p>
+
+
+            <p>
+              • Assign tasks to responsible agents
+            </p>
+
+
+            <p>
+              • Follow up on decisions
+            </p>
+
+
+          </div>
+
 
 
         </>
@@ -293,15 +283,11 @@ function MeetingRoom() {
 
 
 
-
     </div>
 
   );
-
 
 }
 
 
 export default MeetingRoom;
-
-
