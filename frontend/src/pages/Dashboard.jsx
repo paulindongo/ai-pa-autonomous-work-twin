@@ -24,11 +24,9 @@ function Dashboard() {
   ];
 
 
-
   return (
 
     <div className="dashboard-layout">
-
 
       <Sidebar />
 
@@ -54,55 +52,41 @@ function Dashboard() {
 
 
 
-
         <section className="hero-card">
-
 
           <h2>
             🧠 AI-PA Command Center
           </h2>
-
 
           <p>
             Your autonomous work twin coordinates meetings,
             decisions, tasks, and AI collaboration on your behalf.
           </p>
 
-
         </section>
-
-
 
 
 
 
         <section className="hero-card">
 
-
           <h2>
             AI-PA Status
           </h2>
-
 
           <h3>
             🤖 Atlas AI
           </h3>
 
-
           <p>
             🟢 Online
           </p>
-
 
           <p>
             Monitoring tasks and ready for autonomous collaboration.
           </p>
 
-
         </section>
-
-
-
 
 
 
@@ -128,8 +112,6 @@ function Dashboard() {
 
 
 
-
-
           <div className="stat-card">
 
             <h3>
@@ -145,8 +127,6 @@ function Dashboard() {
             </p>
 
           </div>
-
-
 
 
 
@@ -167,10 +147,7 @@ function Dashboard() {
           </div>
 
 
-
         </section>
-
-
 
 
 
@@ -188,44 +165,33 @@ function Dashboard() {
           <Link to="/meetings">
 
             <button className="save-button">
-
               🚀 Start AI Meeting
-
             </button>
 
           </Link>
-
 
 
 
           <Link to="/connect">
 
             <button className="save-button">
-
               🤖 Connect AI Agent
-
             </button>
 
           </Link>
-
 
 
 
           <Link to="/settings">
 
             <button className="save-button">
-
               ⚙ Manage Profile
-
             </button>
 
           </Link>
 
 
-
         </section>
-
-
 
 
 
@@ -255,19 +221,13 @@ function Dashboard() {
 
                 {activity.text}
 
-
               </p>
-
 
             ))
           }
 
 
-
         </section>
-
-
-
 
 
 
