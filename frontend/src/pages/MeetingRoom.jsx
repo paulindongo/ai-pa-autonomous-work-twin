@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 function MeetingRoom() {
 
+
   const [topic, setTopic] = useState("Product launch planning");
   const [meeting, setMeeting] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -16,7 +17,7 @@ function MeetingRoom() {
     try {
 
       const response = await fetch(
-        `https://verbose-space-cod-vpv4rv9wj7q5c69x5-8000.app.github.dev/meeting/create?topic=${encodeURIComponent(topic)}`,
+        `http://localhost:8000/meeting/create?topic=${encodeURIComponent(topic)}`,
         {
           method: "POST"
         }
@@ -30,7 +31,7 @@ function MeetingRoom() {
 
     } catch (error) {
 
-      console.error(error);
+      console.error("Meeting error:", error);
 
       alert("Unable to connect to AI Meeting Room");
 
@@ -97,7 +98,7 @@ function MeetingRoom() {
 
         >
 
-          {loading ? "Agents are thinking..." : "Start AI Meeting"}
+          {loading ? "Agents are thinking..." : "🚀 Start AI Meeting"}
 
         </button>
 
@@ -110,7 +111,7 @@ function MeetingRoom() {
 
       {loading && (
 
-        <div className="stat-card thinking-card">
+        <div className="stat-card">
 
           <h2>
             🤖 AI Agents Thinking...
@@ -139,8 +140,6 @@ function MeetingRoom() {
 
 
 
-
-
       {meeting && (
 
         <>
@@ -148,36 +147,18 @@ function MeetingRoom() {
 
           <div className="stat-card">
 
-
             <h2>
               👥 AI Participants
             </h2>
 
 
-            <div className="agent-grid">
+            {meeting.participants?.map((agent)=>(
 
-
-            {meeting.participants.map((agent)=>(
-              
-              <div 
-                className="agent-card"
-                key={agent}
-              >
-
-                <h3>
-                  🤖 {agent}
-                </h3>
-
-                <p>
-                  Online
-                </p>
-
-              </div>
+              <p key={agent}>
+                🤖 {agent} Online
+              </p>
 
             ))}
-
-
-            </div>
 
 
           </div>
@@ -186,26 +167,21 @@ function MeetingRoom() {
 
 
 
-
-
           <div className="stat-card">
 
-
             <h2>
-              💬 Live Meeting Timeline
+              💬 AI Discussion
             </h2>
 
 
-            {meeting.messages.map((msg,index)=>(
+            {meeting.messages?.map((msg,index)=>(
 
               <p key={index}>
 
                 <strong>
                   {msg.sender}
                 </strong>
-
                 :
-                
                 {msg.message}
 
               </p>
@@ -219,57 +195,23 @@ function MeetingRoom() {
 
 
 
-
           <div className="stat-card">
 
-
             <h2>
-              📋 AI Generated Summary
+              📋 Final AI Summary
             </h2>
 
 
             <p>
-              ✅ Key decisions captured
+              ✅ Decisions captured from AI collaboration
             </p>
 
-
             <p>
-              ✅ Recommendations prepared
+              ✅ Strategic recommendations prepared
             </p>
 
-
             <p>
-              ✅ Next steps generated
-            </p>
-
-
-          </div>
-
-
-
-
-
-
-          <div className="stat-card">
-
-
-            <h2>
-              🚀 Action Items
-            </h2>
-
-
-            <p>
-              • Review AI recommendations
-            </p>
-
-
-            <p>
-              • Assign tasks to responsible agents
-            </p>
-
-
-            <p>
-              • Follow up on decisions
+              ✅ Next steps generated automatically
             </p>
 
 
